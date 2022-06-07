@@ -76,6 +76,14 @@ Highlights:
 - (After each cargo build) Convert the elf image to binary: `esptool.py --chip [esp32|esp32s2|esp32c3] elf2image target/xtensa-esp32-espidf/debug/rust-esp32-std-demo`
 - (After each cargo build) Flash the resulting binary: `esptool.py --chip [esp32|esp32s2|esp32c3] -p /dev/ttyUSB0 -b 460800 --before=default_reset --after=hard_reset write_flash --flash_mode dio --flash_freq 40m --flash_size 4MB 0x10000 target/xtensa-esp32-espidf/debug/rust-esp32-std-demo.bin`
 
+## Preparing an OTA binary
+
+    cargo espflash --release --partition-table ./partitions.csv save-image ota.bin
+
+## Flashing the OTA over UART
+
+    cargo run -p flasher --target x86_64-unknown-linux-gnu -- ota.bin --uart /dev/ttyUSB0 --baudrate 921600
+
 ## Monitor
 
 - Once flashed, the board can be connected with any suitable serial monitor, e.g.:

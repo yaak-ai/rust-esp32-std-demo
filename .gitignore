@@ -2,5 +2,7 @@
 /.espressif
 /.embuild
 /target
+/flasher/target
+/messages/target
 /Cargo.lock
 **/*.rs.bk

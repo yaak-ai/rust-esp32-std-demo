@@ -1,0 +1,21 @@
+[package]
+name = "flasher"
+version = "0.1.0"
+authors = ["Maxime Borges <contact@maximeborg.es>"]
+edition = "2018"
+categories = ["embedded", "hardware-support"]
+keywords = ["embedded", "svc", "idf", "esp-idf", "esp32"]
+description = "A tool for flashing OTA app via UART"
+license = "PROPRIETARY"
+readme = "README.md"
+
+[dependencies]
+argh = "0.1.7"
+anyhow = {version = "1", features = ["backtrace"]}
+log = "0.4"
+thiserror = "1.0.31"
+serialport = "4.2"
+messages = { path="../messages" }
+
+[build-dependencies]
+anyhow = "1"
