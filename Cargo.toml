@@ -6,9 +6,9 @@ members = [
 
 [package]
 name = "rust-ota-demo"
-version = "0.1.0"
-authors = ["Maxime Borges <contact@maximeborg.es>"]
-edition = "2018"
+authors = ["ivmarkov", "Maxime Borges","MartinBroers"]
+version = "0.2.0"
+edition = "2021"
 categories = ["embedded", "hardware-support"]
 keywords = ["embedded", "svc", "idf", "esp-idf", "esp32"]
 description = "A demo app that allows OTA update via UART"
@@ -22,29 +22,21 @@ opt-level = "s"
 debug = true # Symbols are nice and they don't increase the size on Flash
 opt-level = "z"
 
-[features]
-default = ["experimental"]
-
-experimental = ["esp-idf-svc/experimental", "esp-idf-hal/experimental", "embedded-svc/experimental"]
-
 [dependencies]
 anyhow = {version = "1", features = ["backtrace"]}
 log = "0.4"
-esp-idf-sys = { version = "0.31", features = ["binstart"] }
-esp-idf-svc = "0.41"
-# esp-idf-hal = "0.37"
-esp-idf-hal = { git = "https://github.com/yaak-ai/esp-idf-hal.git", branch = "master" }
-embedded-svc = "0.21"
-embedded-hal = "1.0.0-alpha.8"
+embedded-hal = "0.2"
+embedded-svc = "0.23"
+esp-idf-hal = {version = "0.40"}
+esp-idf-svc = { version = "0.44", features = ["experimental"] }
+esp-idf-sys = { version = "0.32", features = ["binstart"] }
 messages = { path = "messages" }
-
-serde = "1.0"
 smlang = "0.5.1"
-
 
 [build-dependencies]
 embuild = "0.29"
 anyhow = "1"
 
-# Future; might be possible once https://github.com/rust-lang/cargo/issues/9096 hits Cargo nightly:
-#rust-esp32-ulp-blink = { git = "https://github.com/ivmarkov/rust-esp32-ulp-blink", artifact = "bin" }
+[patch.crates-io]
+# https://codesti.com/issue/ivmarkov/rust-esp32-std-demo/123
+embedded-io = { git = "https://github.com/embassy-rs/embedded-io.git", tag = "v0.3.0"}
